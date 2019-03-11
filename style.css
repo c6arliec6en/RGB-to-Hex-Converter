@@ -1,7 +1,7 @@
 .content {
 	display: flex;
 	flex-flow: column;
-	
+	align-items: center;
 }
 
 .show {
@@ -66,4 +66,27 @@
 #alert {
 	color: red;
 	font-size: 24px;
+}
+
+.bar {
+	width: 100px;
+}
+
+.color-bar {
+	display: flex;
+	margin-top: 20px;
+}
+
+.color-mark {
+	width: 20px;
+	height: 20px;
+	border:1px solid black;
+	text-align: center;
+}
+
+.color-display {
+	width: 50px;
+	height: 20px;
+	border:1px solid;
+	text-align: center;
 }
