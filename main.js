@@ -73,6 +73,12 @@ function rgbConvertHex  (r, g, b) {
 
 //Color Bar
 
+const colorBars = document.querySelectorAll('.bar')
+const colorDisplay = document.querySelectorAll('.color-display')
+const hexDisplay = document.querySelector('.hex-display')
+const content = document.querySelector('body')
+const hexBar = ['FF','FF','FF']
+
 
 function rgbConvertHexBar  (color) {
 	let hex = ''
@@ -116,41 +122,40 @@ function rgbConvertHexBar  (color) {
 
 
 
-const colorBars = document.querySelectorAll('.bar')
-const colorDisplay = document.querySelector('.color-display')
-const hexDisplay = document.querySelector('.hex-display')
-const content = document.querySelector('body')
-const hexBar = ['FF','FF','FF']
 
+// 即時輸出現在的顏色
 function showTheColor () {
 	let background = '#' + hexBar[0] + hexBar[1] + hexBar[2]
 	hexDisplay.innerHTML = background 
 	content.style.backgroundColor = background
 }
 
-
+// 讓一開始顯示color bar的數字
+(function () {
+	colorDisplay.forEach(a => {
+	a.innerHTML = a.previousElementSibling.value
+	})
+})()
 
 
 function getTheValue () {
 	let value = this.value
-	
 
-	// console.log(this)
 	this.nextElementSibling.innerHTML = value
 
 	if (this.matches('#red-bar')) {
 		hexBar[0] = rgbConvertHexBar(value)
-		console.log(hexBar)
-		console.log('cool')
 		showTheColor () 
 	}
 
 	if (this.matches('#green-bar')) {
-		console.log('good')
+		hexBar[1] = rgbConvertHexBar(value)
+		showTheColor () 
 	}
 
 	if (this.matches('#black-bar')) {
-		console.log('333')
+		hexBar[2] = rgbConvertHexBar(value)
+		showTheColor () 
 	}
 
 
@@ -158,4 +163,6 @@ function getTheValue () {
 colorBars.forEach(colorBar => colorBar.addEventListener('change',getTheValue))
 colorBars.forEach(colorBar => colorBar.addEventListener('mousemove',getTheValue))
 
+
+showTheColor () 
 
