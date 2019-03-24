@@ -5,25 +5,32 @@ const submit = document.querySelector('.submit')
 const hexShow = document.querySelector('.hex-show')
 const hexColor = document.querySelector('.hex-color')
 const alert = document.querySelector('#alert')
-
+const colors = document.querySelectorAll('[name="color"]')
 
 submit.addEventListener('click', event => {
 	alert.innerHTML = ''
-	let redCode = Number(red.value)
-	let greenCode = Number(green.value)
-	let blackCode = Number(black.value)
+	let rgb = []
 
-	if (redCode == '' || greenCode == '' || blackCode == '') {
-		alert.innerHTML += "請勿留白"
-	} else if (redCode < 0 || greenCode < 0 || blackCode < 0 || redCode > 255 || greenCode > 255 || blackCode > 255) {
-		alert.innerHTML += "請輸入0~255之間的數字"
-	} else  {
-		rgbConvertHex (redCode, greenCode , blackCode)
-	}
+	colors.forEach(color => {
+		if (color.value == '') {
+			alert.innerHTML = "請勿留白"
+			color.classList.add('danger')
+			
+		} else if (color.value < 0 || color.value > 255 || isNaN(color.value)) { 
+			alert.innerHTML = "請輸入0~255之間的數字"
+			color.classList.add('danger')
+			
+		} else {
+			color.classList.remove('danger')
+			rgb.push(color.value)
+		}
+	})
+	rgbConvertHex (rgb)
+	
 })
 
-function rgbConvertHex  (r, g, b) {
-	let rgbCode = [r,g,b]
+function rgbConvertHex  (rgbArray) {
+	let rgbCode = rgbArray
 	let hex = '#'
 
 	rgbCode.forEach(code => {
